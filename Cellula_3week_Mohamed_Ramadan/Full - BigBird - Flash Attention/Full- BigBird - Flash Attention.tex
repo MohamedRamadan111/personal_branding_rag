@@ -1,0 +1,215 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{xcolor}
+
+\title{Efficient Attention Mechanisms: \\ BigBird and FlashAttention}
+\author{Mohamed Ramadan}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Transformer models rely on the self-attention mechanism, where each token attends to every other token in the sequence.
+
+Given a sequence of length $n$, full self-attention computes:
+
+\[
+\text{Attention}(Q,K,V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d}}\right)V
+\]
+
+This requires computing an $n \times n$ attention matrix.
+
+\textbf{Problem:}
+\begin{itemize}
+    \item Time Complexity: $\mathcal{O}(n^2)$
+    \item Memory Complexity: $\mathcal{O}(n^2)$
+\end{itemize}
+
+This becomes infeasible for long sequences (e.g., documents, DNA, video frames).
+
+\section{Full Attention Bottleneck}
+
+In full attention, every token interacts with every other token.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{full - Attention.png}
+    \caption{Full Self-Attention: Each token attends to all tokens ($\mathcal{O}(n^2)$).}
+\end{figure}
+
+For example, with 10 tokens:
+\[
+10 \times 10 = 100 \text{ attention scores}
+\]
+
+For 10,000 tokens:
+\[
+10^4 \times 10^4 = 10^8
+\]
+
+Clearly quadratic growth is the bottleneck.
+
+\section{BigBird: Sparse Attention for Linear Scaling}
+
+BigBird introduces structured sparse attention to reduce complexity from $\mathcal{O}(n^2)$ to $\mathcal{O}(n)$.
+
+Instead of attending to all tokens, each token attends to:
+
+\begin{itemize}
+    \item \textbf{Global tokens}
+    \item \textbf{Local window tokens}
+    \item \textbf{Random tokens}
+\end{itemize}
+
+\[
+\text{Complexity} = \mathcal{O}(n)
+\]
+
+\subsection{Intuition}
+
+\begin{itemize}
+    \item Global tokens maintain long-range communication.
+    \item Local window captures nearby context.
+    \item Random connections ensure theoretical expressivity.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{BigBird.png}
+    \caption{BigBird Sparse Attention Pattern (Global + Local + Random).}
+\end{figure}
+
+\subsection{Why BigBird Works}
+
+BigBird was proven to be:
+\begin{itemize}
+    \item A universal approximator of sequence functions
+    \item Turing complete under certain conditions
+\end{itemize}
+
+Thus, it preserves theoretical power while reducing computational cost.
+
+\section{FlashAttention: IO-Aware Exact Attention}
+
+FlashAttention does \textbf{NOT} approximate attention.
+
+Instead, it computes exact attention but optimizes memory access.
+
+\subsection{Core Idea}
+
+The real bottleneck is memory bandwidth (HBM), not FLOPs.
+
+FlashAttention:
+\begin{enumerate}
+    \item Tiles the attention matrix into blocks
+    \item Computes each block inside fast SRAM
+    \item Uses an online softmax trick to merge results
+    \item Avoids materializing the full $n \times n$ matrix
+\end{enumerate}
+
+\[
+\text{Time Complexity: } \mathcal{O}(n^2)
+\]
+\[
+\text{Memory Usage: Dramatically Reduced}
+\]
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Flash-Attention.PNG}
+    \caption{FlashAttention: Tiled computation inside GPU SRAM.}
+\end{figure}
+
+\subsection{Key Insight: Online Softmax}
+
+Instead of computing:
+
+\[
+\text{Softmax}(QK^T)
+\]
+
+FlashAttention maintains a running max and running sum across tiles, ensuring numerical stability and exact equivalence to full attention.
+
+Thus:
+\[
+\textbf{Same result as full attention, faster and memory efficient}
+\]
+
+\section{BigBird vs FlashAttention}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lcc}
+\toprule
+ & BigBird & FlashAttention \\
+\midrule
+Attention Type & Sparse & Exact \\
+Time Complexity & $\mathcal{O}(n)$ & $\mathcal{O}(n^2)$ \\
+Memory Efficiency & High & Very High \\
+Long Sequence Scaling & Excellent & Limited by quadratic FLOPs \\
+Accuracy vs Full & Approximate & Identical \\
+Best Use Case & Very long documents & Large LLM training/inference \\
+\bottomrule
+\end{tabular}
+\caption{Comparison between BigBird and FlashAttention}
+\end{table}
+
+\section{When to Use Each?}
+
+\subsection*{Use BigBird When:}
+\begin{itemize}
+    \item Working with extremely long sequences (8k–100k tokens)
+    \item You need linear scaling
+    \item Small approximation is acceptable
+\end{itemize}
+
+\subsection*{Use FlashAttention When:}
+\begin{itemize}
+    \item Training large LLMs
+    \item You want exact attention
+    \item GPU memory bandwidth is bottleneck
+\end{itemize}
+
+\section{Real-World Applications}
+
+\textbf{BigBird Used In:}
+\begin{itemize}
+    \item Long document classification
+    \item Question answering over long contexts
+    \item Genomics
+\end{itemize}
+
+\textbf{FlashAttention Used In:}
+\begin{itemize}
+    \item GPT-style models
+    \item LLaMA variants
+    \item Modern production LLM systems
+\end{itemize}
+
+\section{Conclusion}
+
+Full attention is powerful but quadratic.
+
+BigBird solves the scaling problem via sparse structure.
+
+FlashAttention solves the memory bottleneck via IO-aware optimization.
+
+They address different dimensions of the same core challenge.
+
+\[
+\textbf{BigBird = Algorithmic Efficiency}
+\]
+\[
+\textbf{FlashAttention = Hardware Efficiency}
+\]
+
+\end{document}

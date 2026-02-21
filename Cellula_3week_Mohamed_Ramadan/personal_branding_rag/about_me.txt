@@ -1,0 +1,142 @@
+Mohamed Ramadan Mahgoub
+AI Engineer | NLP & LLM Specialist | RAG Systems Architect
+Cairo, Egypt
+Email: mohamed11120040@gmail.com
+Phone: +20 115 393 1033
+LinkedIn: linkedin.com/in/mohamed-ramadan-76aab2251
+GitHub: github.com/mohamedramadanm1
+
+==============================
+PROFESSIONAL PROFILE
+==============================
+
+Mohamed Ramadan is an AI Engineer specializing in Natural Language Processing (NLP), 
+Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG) systems.
+
+He designs and deploys production-grade RAG pipelines, intelligent agent systems, 
+and dynamic multi-model routing architectures focused on scalability, cost efficiency, 
+and real-world applicability.
+
+His expertise includes semantic search optimization, agentic workflows, 
+memory-enabled systems, transformer-based architectures, and advanced prompt engineering.
+
+Mohamed has hands-on experience reducing LLM operational costs by over 75% 
+and latency by nearly 50% through intelligent routing systems.
+
+He bridges research-level AI concepts with production-ready engineering practices.
+
+==============================
+CORE EXPERTISE
+==============================
+
+• Retrieval-Augmented Generation (RAG) Architecture
+• Large Language Model Orchestration
+• Dynamic LLM Routing & Cost Optimization
+• Semantic Search & Embedding Systems
+• Agentic Workflows using LangGraph
+• Transformer Fine-Tuning (LoRA, LSTM-based NLP models)
+• Tool-Augmented AI Agents
+• Multi-step Reasoning Systems
+• Vector Databases (Milvus, Chroma, FAISS)
+• Prompt Engineering & Evaluation
+
+==============================
+PROFESSIONAL EXPERIENCE
+==============================
+
+NLP / LLM Intern — Cellula Technologies (Jan 2026 – Present)
+
+- Built production-level RAG pipelines (ingestion → chunking → embeddings → retrieval → generation).
+- Designed memory-enabled AI workflows using LangGraph.
+- Implemented advanced code-generation RAG systems.
+- Evaluated retrieval quality using structured metrics.
+- Developed multi-model orchestration pipelines.
+- Built tool-integrated AI agents capable of multi-step reasoning.
+
+NLP / LLM Intern — Namasoft (Aug 2025 – Sep 2025)
+
+- Engineered a production-ready RAG system for contextual Q&A.
+- Built modular embedder and Milvus-based similarity search system.
+- Integrated Ollama models (nomic-embed-text, Llama 3.2).
+- Automated deployment using Docker Compose & Maven.
+- Developed a Dynamic LLM Routing System reducing cost by 75.6% and latency by 48.6%.
+- Achieved 99.2% fallback reliability during evaluation.
+
+Data Science Instructor (Part-Time) — YAT / DECI (Dec 2024 – Aug 2025)
+
+- Delivered hands-on AI & data science training.
+- Designed real-world ML exercises.
+- Mentored students in portfolio-based AI projects.
+
+==============================
+SELECTED PROJECTS
+==============================
+
+Dynamic LLM Routing System
+- Intelligent model classification workflow using LangGraph.
+- Integrated semantic caching with Sentence-BERT.
+- Achieved 99.2% fallback success rate.
+- Reduced redundant LLM calls significantly.
+
+RAG System (LangChain4j + Milvus + Ollama)
+- Built Java-based RAG pipeline.
+- Implemented scalable document retrieval.
+- Automated containerized deployment.
+
+SignVision (ASL Recognition)
+- Processed 87K+ images.
+- Used transfer learning (VGG16, ResNet50V2, DenseNet201).
+- Achieved 99%+ test accuracy.
+
+Asteroid Diameter Prediction
+- Built Gradient Boosting model (R² = 0.981).
+- Applied feature engineering & hyperparameter optimization.
+
+==============================
+TECHNICAL STACK
+==============================
+
+Programming:
+Python, Java, C++
+
+AI/ML:
+TensorFlow, Keras, Scikit-learn, Transformers
+
+LLM Ecosystem:
+LangChain, LangGraph, LangChain4j, Milvus, FAISS,
+Ollama, Sentence-BERT, RAG Architecture
+
+Dev & Deployment:
+Docker, Maven, Streamlit, Git, REST APIs
+
+Core Engineering:
+Data Structures, Algorithms, Deep Learning,
+Software Engineering Principles
+
+==============================
+VALUE PROPOSITION
+==============================
+
+Mohamed Ramadan specializes in designing intelligent AI systems 
+that are scalable, cost-efficient, and production-ready.
+
+He combines:
+
+• Strong theoretical AI foundation
+• Practical LLM systems engineering
+• Cost-aware model orchestration
+• Real-world deployment experience
+
+He is particularly strong in:
+- Building optimized RAG pipelines
+- Designing intelligent routing systems
+- Deploying agent-based AI systems
+- Reducing inference cost while maintaining performance
+
+==============================
+CAREER OBJECTIVE
+==============================
+
+To contribute to advanced AI teams building scalable, 
+production-grade LLM systems and intelligent agent architectures 
+that solve real-world problems.
